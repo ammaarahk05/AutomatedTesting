@@ -1,0 +1,221 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package movieticketsalesreport;
+
+/**
+ *
+ * @author ammaa
+ */
+public class MovieTicketSalesReport {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        // Declarations
+        double[][] sales = {
+             {3000, 1500, 1700},  // Total Sales for the Napolean movie for January, February & March
+             {3500, 1200, 1600}   // Total Sales for the Oppenheimer movie for January, February & March
+        };
+        
+        // Initialize total sales for Napolean & Oppenheimer 
+             double napoleanTotal = 0;
+             double oppenheimerTotal = 0;
+        
+        // Use a For Loop to loop through the 2D array to calculate totals
+        // Use i to represent each technician (row)
+        // Use j to represent each month (column)
+        // Outer loop - goes through technicians (rows)
+             for (int i = 0; i < sales.length; i++) {
+        // Inner loop - goes through months (columns)
+             for (int j = 0; j < sales[i].length; j++) {
+        // Add repair costs for Joe (if i == 0)
+               if (i == 0) {
+            napoleanTotal += sales[i][j];
+        }
+        // Add repair costs for Jane (if i == 1)
+               else {
+            oppenheimerTotal += sales[i][j];
+        }
+    }
+}
+        
+        // Display the report
+            System.out.println("MOVIE TICKET SALES REPORT - 2024");
+            System.out.println("NAME\t\t\tJAN\t\tFEB\t\tMAR");
+            System.out.println("---------------------------------------------------------------");
+
+            System.out.println("Napolean\t\t " + sales[0][0] + "\t " + sales[0][1] + "\t " + sales[0][2]);
+            System.out.println("Oppenheimer\t\t " + sales[1][0] + "\t " + sales[1][1] + "\t " + sales[1][2]);
+            
+            System.out.println();
+        
+        // Print the total movie sales for both movies (Napolean & Oppenheimer)
+            System.out.println("Total movie ticket sales for Napolean: " + napoleanTotal);
+            System.out.println("Total vmovie ticket sales for Oppenheimer: " + oppenheimerTotal);
+            
+            System.out.println();
+
+        // Call the method to determine the top performing movie
+            Sales salesClass = new Sales();
+            int topMovieIndex = salesClass.TopSales(sales);
+    
+        // Display the top performing movie
+            if (topMovieIndex == 0) {
+        System.out.println("Top performing movie: Oppenheimer");
+            } else if (topMovieIndex == 1) {
+        System.out.println("Top performing movie: Napolean");
+    
+        
+    }
+    
+}
+}
+        
+        
+        
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package movieticketsalesreport;
+
+/**
+ *
+ * @author ammaa
+ */
+public interface IMovieTickets {
+    
+    int TotalMovieSales(int[] movieTicketSales);
+    String TopMovie(String[] movies, int[] totalSales);
+    
+    
+    
+    
+    
+}
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package movieticketsalesreport;
+
+/**
+ *
+ * @author ammaa
+ */
+public class MovieTickets implements IMovieTickets {
+    
+    
+   
+        @Override
+ public int TotalMovieSales(int[] movieTicketSales){
+    double total = 0;
+    // Use a traditional for loop
+    for (int i = 0; i < salesCosts.length; i++) {
+        total += salesCosts[i];  // Add each cost to the total
+    }
+
+    return total;  // Return the total sales cost
+
+}
+
+
+       @Override 
+    public String TopMovie(String[] movies, int[] totalSales){
+        int topMovieIndex = 0;  // Assume Napolean is the top movie initially
+    double napoleanTotal = 0;
+    double oppenheimerTotal = 0;
+    
+    // Calculate the total for each movie
+    for (int i = 0; i < sales.length; i++) {
+        double totalForSales = 0;
+        for (int j = 0; j < sales[i].length; j++) {
+            totalForSales += sales[i][j];
+        }
+        
+        if (i == 0) napoleanTotal = totalForSales;
+        else oppenheimerTotal = totalForSales;
+    }
+
+    // Compare the totals to determine the top movie
+    if (napoleanTotal > oppenheimerTotal) {
+        return 0;  // Napolean
+    } else {
+        return 1;  // Oppenheimer
+    }
+}
+        
+        
+        
+        
+        
+        
+        
+    }
+ 
+ 
+ 
+ /*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/EmptyTestNGTest.java to edit this template
+ */
+package movieticketsalesreport;
+
+import static org.testng.Assert.*;
+import org.testng.annotations.Test;
+
+/**
+ *
+ * @author ammaa
+ */
+public class MovieTicketsNGTest {
+    
+    public MovieTicketsNGTest() {
+    }
+
+    @Test
+    public void CalculateTotalSales_ReturnsExpectedTotalSales(){
+        // Set up the Sales object and total sales value
+    Sales sales = new Sales();
+    double[] salesCosts = {3000, 1500, 1700};
+
+    // Calculate the total repair costs
+    double totalCosts = sales.SalesCosts(salesCosts);
+
+    // Debug output
+    System.out.println("Calculated total sales costs: " + totalCosts);
+
+    // Check if the total is as expected
+    assertEquals(15500.0, totalCosts, "The calculated total sales costs should be 6200");
+}
+        
+ 
+    @Test
+    public void TopMovieSales_ReturnsTopMovie() {
+        Sales sales = new Sales();
+    double[][] salesRepairs = {
+        {3000, 1500, 1700},  // Napoleans' total sales for the first 3 months
+        {3500, 1200, 1600}   // Oppenheimers' total sales for the first 3 months
+    };
+    int topTechnicianIndex = sales.TopSales(sales);
+    assertEquals(0, topTechnicianIndex, "Oppenheimer should be the top movie.");
+}
+        
+
+}
+        
+    
+    
+
+
+ 
+
+
+    
+    
